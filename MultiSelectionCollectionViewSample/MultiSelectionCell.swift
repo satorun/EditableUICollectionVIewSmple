@@ -12,6 +12,8 @@ class MultiSelectionCell: UICollectionViewCell {
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     
+    var item : ModelItem?
+    
     var isEditMode:Bool = false {
         willSet(newEditMode) {
             println("age willSet:\(isEditMode) -> \(newEditMode)")
@@ -27,13 +29,13 @@ class MultiSelectionCell: UICollectionViewCell {
         didSet(oldSelected) {
             println("age didSet :\(oldSelected) -> \(isSelected)")
             if isSelected {
+                item!.isSelected = true
                 button.highlighted = true
                 backgroundColor = UIColor.blueColor()
-                titleLabel.text = "Selected"
             } else {
+                item!.isSelected = false
                 button.highlighted = false
                 backgroundColor = UIColor.whiteColor()
-                titleLabel.text = "UnSelected"
             }
         }
     }
@@ -43,11 +45,13 @@ class MultiSelectionCell: UICollectionViewCell {
     }
     
     func setData(data: ModelItem) -> Void {
-        if data.isSelected! {
+        item = data
+        if item!.isSelected! {
             isSelected = true
         } else {
             isSelected = false
         }
+        titleLabel.text = item!.title
     }
     
     func toggleSelectState() {

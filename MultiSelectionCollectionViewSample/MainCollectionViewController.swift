@@ -9,7 +9,7 @@
 import UIKit
 
 class MainCollectionViewController: UICollectionViewController,UICollectionViewDelegateFlowLayout {
-    
+    var itemArray : Array<ModelItem>?
     var isEditMode :Bool = false {
         didSet(oldValue) {
             if isEditMode {
@@ -17,13 +17,15 @@ class MainCollectionViewController: UICollectionViewController,UICollectionViewD
             } else {
                 editButton.title = "編集"
             }
-            self.collectionView?.reloadData()
+            collectionView?.reloadData()
         }
     }
+    
     @IBOutlet weak var editButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         collectionView!.delegate = self;
+        itemArray = p_makeModelArray()
     }
     
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -31,10 +33,11 @@ class MainCollectionViewController: UICollectionViewController,UICollectionViewD
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return itemArray!.count
     }
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell:MultiSelectionCell = collectionView.dequeueReusableCellWithReuseIdentifier("Cell", forIndexPath: indexPath) as MultiSelectionCell
+        cell.setData(itemArray![indexPath.row])
         cell.isEditMode = isEditMode
         return cell
     }
@@ -53,5 +56,14 @@ class MainCollectionViewController: UICollectionViewController,UICollectionViewD
         isEditMode = !isEditMode
     }
 
-    
+    func p_makeModelArray() -> Array<ModelItem> {
+        var array : Array<ModelItem> = []
+        for var i=0;i<100;i++ {
+            let item = ModelItem()
+            item.title = "item \(i)"
+            item.isSelected = false
+            array.append(item)
+        }
+        return array
+    }
 }

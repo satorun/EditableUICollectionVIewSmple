@@ -15,28 +15,14 @@ class MultiSelectionCell: UICollectionViewCell {
     var item : ModelItem?
     
     var isEditMode:Bool = false {
-        willSet(newEditMode) {
-            println("age willSet:\(isEditMode) -> \(newEditMode)")
-        }
         didSet(oldEditMode) {
-            println("age didSet :\(oldEditMode) -> \(isEditMode)")
+            p_view()
         }
     }
     var isSelected:Bool = false {
-        willSet(newSelected) {
-            println("age willSet:\(isSelected) -> \(newSelected)")
-        }
         didSet(oldSelected) {
-            println("age didSet :\(oldSelected) -> \(isSelected)")
-            if isSelected {
-                item!.isSelected = true
-                button.highlighted = true
-                backgroundColor = UIColor.blueColor()
-            } else {
-                item!.isSelected = false
-                button.highlighted = false
-                backgroundColor = UIColor.whiteColor()
-            }
+            item!.isSelected = isSelected
+            p_view()
         }
     }
     
@@ -52,16 +38,52 @@ class MultiSelectionCell: UICollectionViewCell {
             isSelected = false
         }
         titleLabel.text = item!.title
+        p_view()
     }
     
     func toggleSelectState() {
         isSelected = !isSelected // invert
     }
+    
     func didSelect() {
         if isEditMode {
             toggleSelectState()
         } else {
             //toggleSelectState()
         }
+    }
+    
+    func p_view() {
+        if isEditMode {
+            if isSelected {
+                p_selectedViewAtEditMode()
+            } else {
+                p_unSelectedViewAtEditMode()
+            }
+        } else {
+            if isSelected {
+                p_selectedViewAtNormalMode()
+            } else {
+                p_unSelectedViewAtNormalMode()
+            }
+        }
+    }
+    
+    func p_selectedViewAtEditMode() {
+        button.hidden = false
+        backgroundColor = UIColor.blueColor()
+    }
+    func p_selectedViewAtNormalMode() {
+        button.hidden = true
+        backgroundColor = UIColor.yellowColor()
+    }
+    func p_unSelectedViewAtEditMode() {
+        button.hidden = false
+        backgroundColor = UIColor.whiteColor()
+    }
+    func p_unSelectedViewAtNormalMode() {
+        button.hidden = true
+        backgroundColor = UIColor.whiteColor()
+
     }
 }

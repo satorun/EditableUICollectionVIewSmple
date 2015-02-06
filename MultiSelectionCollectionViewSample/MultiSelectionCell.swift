@@ -32,24 +32,15 @@ class MultiSelectionCell: UICollectionViewCell {
     
     func setData(data: ModelItem) -> Void {
         item = data
-        if item!.isSelected! {
-            isSelected = true
-        } else {
-            isSelected = false
-        }
+        isSelected = item!.isSelected!
         titleLabel.text = item!.title
-        p_view()
     }
-    
-    func toggleSelectState() {
-        isSelected = !isSelected // invert
-    }
-    
+
     func didSelect() {
         if isEditMode {
-            toggleSelectState()
+            isSelected = !isSelected // invert
         } else {
-            //toggleSelectState()
+            // 編集モードじゃないときの処理
         }
     }
     

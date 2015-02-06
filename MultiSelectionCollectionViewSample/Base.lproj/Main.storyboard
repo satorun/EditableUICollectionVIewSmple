@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bTG-rK-kSq">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -41,14 +42,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="200" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JY2-2e-GD2">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JY2-2e-GD2">
                                             <rect key="frame" x="8" y="14" width="22" height="22"/>
                                             <state key="normal">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pst-98-MyF">
-                                            <rect key="frame" x="42" y="14" width="145" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pst-98-MyF">
+                                            <rect key="frame" x="8" y="14" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -57,8 +58,15 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="JY2-2e-GD2" firstAttribute="leading" secondItem="QeD-tX-Hq8" secondAttribute="leadingMargin" id="Dcm-WJ-VjB"/>
+                                    <constraint firstItem="pst-98-MyF" firstAttribute="leading" secondItem="QeD-tX-Hq8" secondAttribute="leadingMargin" id="L2d-l2-fr4"/>
+                                    <constraint firstAttribute="centerY" secondItem="pst-98-MyF" secondAttribute="centerY" id="QRM-BT-R75"/>
+                                    <constraint firstAttribute="centerY" secondItem="JY2-2e-GD2" secondAttribute="centerY" id="Ujh-02-Rxi"/>
+                                </constraints>
                                 <connections>
                                     <outlet property="button" destination="JY2-2e-GD2" id="gLz-sz-F53"/>
+                                    <outlet property="leadingSpaceConstraint" destination="L2d-l2-fr4" id="tNX-4f-S2d"/>
                                     <outlet property="titleLabel" destination="pst-98-MyF" id="O7C-8T-MMw"/>
                                 </connections>
                             </collectionViewCell>
